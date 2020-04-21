@@ -24,22 +24,23 @@ public class LinkServiceImpl implements LinkService, Serializable {
      */
     @Override
     public String save(Link link) {
-        String shortUrl = "http://127.0.0.1/";
+        String shortUrl;
         String longUrl = link.getLongUrl();
-        Link link1 = linkRepository.findByLongUrl(longUrl);
-        if (link1 == null) {
-            shortUrl += this.gererateShortUrl(longUrl);
+        Link linkOld = linkRepository.findByLongUrl(longUrl);
+        if (linkOld == null) {
+            shortUrl = this.gererateShortUrl(longUrl);
             link.setShortUrl(shortUrl);
             linkRepository.save(link);
         } else {
-            shortUrl = link1.getShortUrl();
+            shortUrl = linkOld.getShortUrl();
         }
         return shortUrl;
     }
 
     @Override
     public String restoreUrl(String url) {
-        return linkRepository.findByShortUrl(url).getLongUrl();
+        Link link = linkRepository.findByShortUrl(url);
+        return link != null ? link.getLongUrl() : null;
     }
 
     /**
