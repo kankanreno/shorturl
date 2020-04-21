@@ -37,7 +37,7 @@ public class LinkController {
             Link link = new Link();
             link.setLongUrl(url);
             String shortUrl = linkService.save(link);
-            return new Result(0, "生成短链接成功", serverConfig.getUrl() + shortUrl);
+            return new Result(0, "生成短链接成功", serverConfig.getUrl() + shortUrl); // TODO: 本地测试时，端口号获取不到
         } else {
             return new Result(-1, "网址必须以http或https开头");
         }
