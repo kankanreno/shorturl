@@ -4,8 +4,8 @@ import edu.sjtu.shorturl.entity.Link;
 import edu.sjtu.shorturl.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -20,7 +20,7 @@ public class LinkController {
      * @param url
      * @return Caron
      */
-    @RequestMapping("/api")
+    @GetMapping("/api")
     @ResponseBody
     public Object save(String url) {
 
@@ -42,7 +42,7 @@ public class LinkController {
      * @param url
      * @return
      */
-    @RequestMapping("/{url}")
+    @GetMapping("/{url}")
     public String restoreUrl(@PathVariable("url") String url) {
 
         String restoreUrl = linkService.restoreUrl("http://cni.tips/" + url);
